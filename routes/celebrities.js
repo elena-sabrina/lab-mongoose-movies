@@ -18,6 +18,17 @@ router.get("/celebrities", (req, res, next) => {
 
 //Iteration 2: Display single Celebrity
 
+router.get("/celebrities/:id", (req, res, next) => {
+  const id = req.params.id;
+  Celebrity.findById(id)
+    .then((celebrities) => {
+      res.render("celebrities/show", { celebrities });
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
+
 /*
 router.post("/celebrities", (req, res, next) => {
   const data = req.body;
