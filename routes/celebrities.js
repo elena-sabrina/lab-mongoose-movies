@@ -5,7 +5,7 @@ const router = express.Router();
 
 // Handle GET request for website root
 
-//Iteration 1: Display all Celebrities
+//Iteration 2: Display all Celebrities
 router.get("/celebrities", (req, res, next) => {
   Celebrity.find()
     .then((celebrities) => {
@@ -16,7 +16,7 @@ router.get("/celebrities", (req, res, next) => {
     });
 });
 
-//Iteration 2: Display single Celebrity
+//Iteration 3: Display single Celebrity
 
 router.get("/celebrities/:id", (req, res, next) => {
   const id = req.params.id;
@@ -29,8 +29,14 @@ router.get("/celebrities/:id", (req, res, next) => {
     });
 });
 
+
+//Iteration 4: Add Celebrities
+router.get("/celebrities/create", (req, res, next) => {
+    res.render('celebrities/create');
+});
+
 /*
-router.post("/celebrities", (req, res, next) => {
+router.post("/celebrities/create", (req, res, next) => {
   const data = req.body;
 
   Celebrity.create({
@@ -45,17 +51,5 @@ router.post("/celebrities", (req, res, next) => {
       res.render("error");
     });
 });
-
-router.get("/celebrities/:id", (req, res, next) => {
-  const id = req.params.id;
-  Resource.findById(id)
-    .then((resource) => {
-      res.render("celebrity/single", { celebrity: celebrity });
-    })
-    .catch((error) => {
-      res.render("error");
-    });
-});
 */
-
 module.exports = router;
