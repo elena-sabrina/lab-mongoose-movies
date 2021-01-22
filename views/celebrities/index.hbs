@@ -1,7 +1,9 @@
-<h2>Celebrity Index</h2>
+<h2>Celebrity List</h2>
 
-{{#for each}}
-    <p>{{ celebrity.name }}</p>
-    <p>{{ <celebrity.occupation> }}</p>
-    <p>{{ <celebrity.catchPhrase> }}</p>
+{{#each celebrities}}
+    <p>{{ name }}</p>
+    <p>{{ occupation }}</p>
+    <p>{{ catchPhrase }}</p>
 {{/each}}
+
+<a href="/celebrities">Link to Celebrities</a>
