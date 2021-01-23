@@ -6,7 +6,7 @@ const router = express.Router();
 // Handle GET request for website root
 
 //Iteration 2: Display all Celebrities
-router.get("/celebrities", (req, res, next) => {
+router.get("/", (req, res, next) => {
   Celebrity.find()
     .then((celebrities) => {
       res.render("celebrities/index", { celebrities });
@@ -17,22 +17,22 @@ router.get("/celebrities", (req, res, next) => {
 });
 
 //Iteration 4: Add Celebrities
-router.get("/celebrities/create", (req, res, next) => {
+router.get("/create", (req, res, next) => {
   res.render("celebrities/create");
 });
 
-router.post("/celebrities/create", (req, res, next) => {
+router.post("/", (req, res, next) => {
   const data = req.body;
-  console.log(data);
-
-  Celebrity.create({
+  const celebrity = new Celebrity({
     name: data.name,
     occupation: data.occupation,
     catchPhrase: data.catchPhrase
-  })
-    .then(() => {
+  });
+  celebrity
+    .save()
+    .then((celebrity) => {
       console.log("Celebrity created");
-      res.render("celebrities/index");
+      res.redirect("celebrities");
     })
     .catch((error) => {
       next(error);
@@ -41,7 +41,7 @@ router.post("/celebrities/create", (req, res, next) => {
 
 //Iteration 3: Display single Celebrity
 
-router.get("/celebrities/:id", (req, res, next) => {
+router.get("/:id", (req, res, next) => {
   const id = req.params.id;
   Celebrity.findById(id)
     .then((celebrities) => {
@@ -55,32 +55,30 @@ router.get("/celebrities/:id", (req, res, next) => {
 //Iteration 5: Delete Celebrity
 
 //We don't have a Confirmation Page so no GET just the Post
-router.get("celebrities/:id/delete", (req, res, next) => {
-  const id = req.params.id;
-  Resource.findById(id)
-    .then((resource) => {
-      console.log("Found celebrity by ID");
-      res.render("celebrities/test-delete-confirmation", {
-        celebrities: celebrities
-      });
-    })
-    .catch((error) => {
-      next(error);
-    });
-});
 
 /*
-router.post("celebrities/:id/delete", (req, res, next) => {
+router.get('(:id/delete', (req, res, next) => {
   const id = req.params.id;
-  Resource.findByIdAndRemove(id)
+  Celebrity.findById(id)
+  .then((celebrity) => {
+    res.render ('celebrities/:id/delete' , { celebrities });
+  })
+  .cath(error => {
+    next (error);
+  });
+});
+
+*/
+
+router.post("/:id/delete", (req, res, next) => {
+  const id = req.params.id;
+  Celebrity.findByIdAndRemove(id)
     .then(() => {
-      console.log("router accessed has id");
-      res.redirect("/");
+      res.redirect("/celebrities");
     })
     .catch((error) => {
       next(error);
     });
 });
-*/
 
 module.exports = router;
