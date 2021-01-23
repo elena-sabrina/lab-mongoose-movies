@@ -16,6 +16,28 @@ router.get("/celebrities", (req, res, next) => {
     });
 });
 
+//Iteration 4: Add Celebrities
+router.get("/celebrities/create", (req, res, next) => {
+  res.render("celebrities/create");
+});
+
+router.post("/celebrities/create", (req, res, next) => {
+  const data = req.body;
+  console.log(data);
+
+  Celebrity.create({
+    name: data.name,
+    occupation: data.occupation,
+    catchPhrase: data.catchPhrase
+  })
+    .then(() => {
+      res.redirect("/");
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
+
 //Iteration 3: Display single Celebrity
 
 router.get("/celebrities/:id", (req, res, next) => {
@@ -29,27 +51,4 @@ router.get("/celebrities/:id", (req, res, next) => {
     });
 });
 
-
-//Iteration 4: Add Celebrities
-router.get("/celebrities/create", (req, res, next) => {
-    res.render('celebrities/create');
-});
-
-/*
-router.post("/celebrities/create", (req, res, next) => {
-  const data = req.body;
-
-  Celebrity.create({
-    name: data.name,
-    occupation: data.occupation,
-    catchPhrase: data.catchPhrase
-  })
-    .then((celebrity) => {
-      res.render("index/${celebrities._id}");
-    })
-    .catch((error) => {
-      res.render("error");
-    });
-});
-*/
 module.exports = router;
