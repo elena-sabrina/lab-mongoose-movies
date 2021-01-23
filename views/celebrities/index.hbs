@@ -1,7 +1,8 @@
 <h2>Celebrity List</h2>
 
 {{#each celebrities}}
-    <p>{{ name }}</p>
+<div class="celebrity-box">
+    <h3>{{ name }}</h3>
     <p>{{ occupation }}</p>
     <p>{{ catchPhrase }}</p>
     <button>
@@ -13,11 +14,8 @@
     <label for="delete-celebrity" hidden>Delete Celebrity</label>
         <button>Delete</button>
     </form>
-    
+</div>  
 
-    </br>
-    </br>
-    </br>
 
 {{/each}}
 
