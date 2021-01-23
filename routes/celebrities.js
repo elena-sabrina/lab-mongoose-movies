@@ -31,7 +31,8 @@ router.post("/celebrities/create", (req, res, next) => {
     catchPhrase: data.catchPhrase
   })
     .then(() => {
-      res.render("");
+      console.log("Celebrity created");
+      res.render("celebrities/index");
     })
     .catch((error) => {
       next(error);
@@ -50,5 +51,36 @@ router.get("/celebrities/:id", (req, res, next) => {
       next(error);
     });
 });
+
+//Iteration 5: Delete Celebrity
+
+//We don't have a Confirmation Page so no GET just the Post
+router.get("celebrities/:id/delete", (req, res, next) => {
+  const id = req.params.id;
+  Resource.findById(id)
+    .then((resource) => {
+      console.log("Found celebrity by ID");
+      res.render("celebrities/test-delete-confirmation", {
+        celebrities: celebrities
+      });
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
+
+/*
+router.post("celebrities/:id/delete", (req, res, next) => {
+  const id = req.params.id;
+  Resource.findByIdAndRemove(id)
+    .then(() => {
+      console.log("router accessed has id");
+      res.redirect("/");
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
+*/
 
 module.exports = router;

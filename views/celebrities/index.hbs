@@ -4,7 +4,22 @@
     <p>{{ name }}</p>
     <p>{{ occupation }}</p>
     <p>{{ catchPhrase }}</p>
-    <a href="/celebrities/{{_id}}">More about {{ name }}</a>
+    <button>
+     <a href="/celebrities/{{_id}}">More about {{ name }}</a>  
+    </button> 
+    </br>
+
+   {{!--{{ <form method= "POST" action="/celebrities/{{_id}}/delete">
+        <button>Delete</button>
+    </form>
+    }} --}}
+
+    <a href="/celebrities/{{_id}}/delete">Delete Celebrity</a>
+
+    </br>
+    </br>
+    </br>
+
 {{/each}}
 
 <a href="/celebrities/create">Create a Celebrity</a>
