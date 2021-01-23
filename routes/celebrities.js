@@ -31,7 +31,7 @@ router.post("/celebrities/create", (req, res, next) => {
     catchPhrase: data.catchPhrase
   })
     .then(() => {
-      res.redirect("/");
+      res.render("");
     })
     .catch((error) => {
       next(error);
