@@ -1,7 +1,7 @@
-require('dotenv').config();
+require("dotenv").config();
 
-const mongoose = require('mongoose');
-const app = require('./app');
+const mongoose = require("mongoose");
+const app = require("./app");
 
 const MONGODB_URI = process.env.MONGODB_URI;
 const PORT = process.env.PORT;
@@ -13,16 +13,16 @@ mongoose
     useFindAndModify: false
   })
   .then(() => {
-    console.log('Mongoose connection established.');
+    console.log("Mongoose connection established.");
     const server = app.listen(PORT, () => {
       console.log(`Listening on http://localhost:${PORT}`);
     });
-    server.on('error', error => {
-      if (error.syscall !== 'listen') {
+    server.on("error", (error) => {
+      if (error.syscall !== "listen") {
         throw error;
       }
       switch (error.code) {
-        case 'EADDRINUSE':
+        case "EADDRINUSE":
           console.error(`Port ${PORT} is already in use`);
           process.exit(1);
           break;
@@ -31,6 +31,9 @@ mongoose
       }
     });
   })
-  .catch(error => {
-    console.error(`There was an error connecting the database to URI "${URI}"`, error);
+  .catch((error) => {
+    console.error(
+      `There was an error connecting the database to URI "${URI}"`,
+      error
+    );
   });
