@@ -40,5 +40,31 @@ router.get("/create", (req, res, next) => {
         next(error);
       });
   });
+
+//Iteration 9: The Movie Details Page
+
+router.get("/:id", (req, res, next) => {
+    const id = req.params.id;
+    Movie.findById(id)
+      .then((movies) => {
+        res.render("movies/show", { movies });
+      })
+      .catch((error) => {
+        next(error);
+      });
+  });
+  
+  //Iteration 11: Deleting Movies
+  
+  router.post("/:id/delete", (req, res, next) => {
+    const id = req.params.id;
+    Movie.findByIdAndRemove(id)
+      .then(() => {
+        res.redirect("/movies");
+      })
+      .catch((error) => {
+        next(error);
+      });
+  });
   
 module.exports = router;

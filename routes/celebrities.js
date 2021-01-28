@@ -1,15 +1,15 @@
-const express = require("express");
-const Celebrity = require("./../models/celebrity");
+const express = require('express');
+const Celebrity = require('./../models/celebrity');
 
 const router = express.Router();
 
 // Handle GET request for website root
 
 //Iteration 2: Display all Celebrities
-router.get("/", (req, res, next) => {
+router.get('/', (req, res, next) => {
   Celebrity.find()
     .then((celebrities) => {
-      res.render("celebrities/index", { celebrities });
+      res.render('celebrities/index', { celebrities });
     })
     .catch((error) => {
       next(error);
@@ -17,11 +17,11 @@ router.get("/", (req, res, next) => {
 });
 
 //Iteration 4: Add Celebrities
-router.get("/create", (req, res, next) => {
-  res.render("celebrities/create");
+router.get('/create', (req, res, next) => {
+  res.render('celebrities/create');
 });
 
-router.post("/", (req, res, next) => {
+router.post('/', (req, res, next) => {
   const data = req.body;
   const celebrity = new Celebrity({
     name: data.name,
@@ -31,8 +31,8 @@ router.post("/", (req, res, next) => {
   celebrity
     .save()
     .then((celebrity) => {
-      console.log("Celebrity created");
-      res.redirect("celebrities");
+      console.log('Celebrity created');
+      res.redirect('celebrities');
     })
     .catch((error) => {
       next(error);
@@ -41,11 +41,11 @@ router.post("/", (req, res, next) => {
 
 //Iteration 3: Display single Celebrity
 
-router.get("/:id", (req, res, next) => {
+router.get('/:id', (req, res, next) => {
   const id = req.params.id;
   Celebrity.findById(id)
     .then((celebrities) => {
-      res.render("celebrities/show", { celebrities });
+      res.render('celebrities/show', { celebrities });
     })
     .catch((error) => {
       next(error);
@@ -70,14 +70,41 @@ router.get('(:id/delete', (req, res, next) => {
 
 */
 
-router.post("/:id/delete", (req, res, next) => {
+router.post('/:id/delete', (req, res, next) => {
   const id = req.params.id;
   Celebrity.findByIdAndRemove(id)
     .then(() => {
-      res.redirect("/celebrities");
+      res.redirect('/celebrities');
     })
     .catch((error) => {
       next(error);
+    });
+});
+
+//Iteration 6 (Bonus): Editing Celebrities
+
+router.get('/:id/edit', (req, res, next) => {
+  const id = req.params.id;
+  Celebrity.findById(id)
+    .then((celebrities) => {
+      res.render('celebrities/edit', { celebrities });
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
+
+router.post('/:id', (req, res, next) => {
+  const id = req.params.id;
+  const name = req.body.name;
+  const occupation = req.body.occupation;
+  const catchPhrase = req.body.catchPhrase;
+  Celebrity.findByIdAndUpdate(id, { name, occupation, catchPhrase })
+    .then((celebrities) => {
+      res.redirect('/celebrities', { celebrities });
+    })
+    .catch((err) => {
+      next(err);
     });
 });
 

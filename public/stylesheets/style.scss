@@ -53,3 +53,19 @@ button {
   margin: 20px 0 0 0;
   background-color: rgb(238, 238, 238);
 }
+
+.primary {
+  background-color: grey;
+  color: white;
+  border: 1px solid grey;
+  font: inherit;
+  padding: 1em;
+  margin: 1em 0;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center ;
+}

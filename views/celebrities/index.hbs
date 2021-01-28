@@ -1,6 +1,12 @@
-<h2>Celebrity List</h2>
+<div class="header">
+    <h2>Celebrity List</h2>
+    <button class="primary">    
+    <a href="/celebrities/create">Create a Celebrity</a>
+    </button> 
+</div>
 
 {{#each celebrities}}
+
 <div class="celebrity-box">
     <h3>{{ name }}</h3>
     <p>{{ occupation }}</p>
@@ -9,15 +15,16 @@
      <a href="/celebrities/{{_id}}">More about {{ name }}</a>  
     </button> 
     </br>
-
+    <button>
+     <a href="/celebrities/{{_id}}/edit">Edit {{ name }}</a>  
+    </button> 
     <form method= "POST" action="/celebrities/{{_id}}/delete">
     <label for="delete-celebrity" hidden>Delete Celebrity</label>
-        <button>Delete</button>
+     <button>Delete</button>
     </form>
 </div>  
 
 
 {{/each}}
 
-<a href="/celebrities/create">Create a Celebrity</a>
 

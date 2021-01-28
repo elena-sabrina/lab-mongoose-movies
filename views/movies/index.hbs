@@ -1,11 +1,16 @@
-<h2>Movie List</h2>
+<div class="header">
+    <h2>Movie List</h2>
+    <button class="primary">    
+    <a href="/movies/create">Create a Movie</a>
+    </button> 
+</div>
 
 {{#each movies}}
 <div class="celebrity-box">
     <h3>{{ title }}</h3>
     <p>{{ genre }}</p>
     <p>{{ plot }}</p>
-    {{!--
+    
     <button>
      <a href="/movies/{{_id}}">More about {{ tite }}</a>  
     </button> 
@@ -14,9 +19,7 @@
     <label for="delete-movie" hidden>Delete Movie</label>
         <button>Delete</button>
     </form>
-   --}}
+
 </div>  
 
 {{/each}}
-
-<a href="/movies/create">Create a Movie</a>
