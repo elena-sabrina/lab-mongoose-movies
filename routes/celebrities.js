@@ -1,4 +1,5 @@
 const express = require('express');
+const Movie = require('../models/movie');
 const Celebrity = require('./../models/celebrity');
 
 const router = express.Router();
@@ -101,7 +102,8 @@ router.post('/:id', (req, res, next) => {
   const catchPhrase = req.body.catchPhrase;
   Celebrity.findByIdAndUpdate(id, { name, occupation, catchPhrase })
     .then((celebrities) => {
-      res.redirect('/celebrities', { celebrities });
+      console.log('Celebrity edited');
+      res.redirect('/celebrities');
     })
     .catch((err) => {
       next(err);

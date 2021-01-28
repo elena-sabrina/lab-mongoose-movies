@@ -10,11 +10,15 @@
     <h3>{{ title }}</h3>
     <p>{{ genre }}</p>
     <p>{{ plot }}</p>
-    
     <button>
      <a href="/movies/{{_id}}">More about {{ tite }}</a>  
     </button> 
     </br>
+
+    <button>
+     <a href="/movies/{{_id}}/edit">Edit {{ title }}</a>  
+    </button> 
+
     <form method= "POST" action="/movies/{{_id}}/delete">
     <label for="delete-movie" hidden>Delete Movie</label>
         <button>Delete</button>
